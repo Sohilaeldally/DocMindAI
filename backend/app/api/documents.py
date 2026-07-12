@@ -4,6 +4,8 @@ from app.utils.file_validate import validate_file_type, validate_file_size
 from pathlib import Path 
 import uuid
 import shutil
+from app.models.document import Document
+from app.db.document_repository import insert_document
 
 router = APIRouter(prefix="/documents", tags=["Documents"])
 
@@ -24,9 +26,21 @@ async def upload_document(file: UploadFile = File(...)):
 
     with open(file_path, "wb") as buffer:   
         shutil.copyfileobj(file.file,buffer)
-   
+
+    new_doc = Document(
+        id=file_id,
+        original_name=file.filename,
+        stored_name=stored_name,
+        content_type=file.content_type,
+        file_size=file_size,
+        status="uploaded"  
+    )
+    insert_document(new_doc)
+
     return {
-        "message": "File uploaded successfully",
-        "original_name": file.filename,
+        "message": "File uploaded successfully and metadata saved.",
+        "id": str(file_id),
+        "original_name": file.filename, 
         "stored_name": stored_name,
     }
+  

@@ -48,3 +48,5 @@ storage/
 
 # Alembic (لو هتستخدميه بعدين)
 alembic/versions/*.pyc
+
+GEMINI.MD
