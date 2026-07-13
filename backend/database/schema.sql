@@ -26,3 +26,15 @@ CREATE TABLE documents (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+CREATE TABLE document_contents (
+    document_id UUID PRIMARY KEY
+        REFERENCES documents(id)
+        ON DELETE CASCADE,
+
+    raw_text TEXT NOT NULL,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

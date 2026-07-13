@@ -12,4 +12,5 @@ async def upload_document(file: UploadFile = File(...)):
             "original_name": new_doc.original_name, 
             "stored_name": new_doc.stored_name,
         }
-  
+
+

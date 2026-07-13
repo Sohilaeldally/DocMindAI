@@ -4,3 +4,5 @@ python-multipart
 pydantic-settings
 psycopg[binary]
 psycopg[binary,pool]
+pypdf
+python-docx
