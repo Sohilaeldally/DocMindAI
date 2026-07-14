@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException,UploadFile, File
 from app.services.document_service import save_uploaded_file
 from app.services.parser_service import process_document
+from app.services.chunking_service import process_chunking
 
 router = APIRouter(prefix="/documents", tags=["Documents"])
 
@@ -10,6 +11,7 @@ async def upload_document(file: UploadFile = File(...)):
   
    try:
         process_document(new_doc.id)
+        process_chunking(new_doc.id)
    except Exception as e:
         raise HTTPException(
             status_code=422,
@@ -25,3 +27,4 @@ async def upload_document(file: UploadFile = File(...)):
 
 
 
+        
