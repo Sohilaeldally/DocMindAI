@@ -30,3 +30,14 @@ CREATE TABLE document_contents (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE document_chunks (
+    id UUID PRIMARY KEY,
+    document_id UUID NOT NULL
+        REFERENCES documents(id)
+        ON DELETE CASCADE,
+    chunk_index INT NOT NULL,
+    chunk_text TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (document_id, chunk_index)
+);
