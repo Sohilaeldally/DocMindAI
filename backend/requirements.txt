@@ -6,3 +6,5 @@ psycopg[binary]
 psycopg[binary,pool]
 pypdf
 python-docx
+pgvector
+sentence-transformers
