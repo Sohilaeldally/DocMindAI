@@ -9,6 +9,6 @@ A specialized RAG (Retrieval-Augmented Generation) system for understanding and 
 - ✅ Upload & Parsing (PDF/DOCX/TXT)
 - ✅ Chunking
 - ✅ Embedding (multilingual-e5-small + pgvector)
-- 🔲 Search Endpoint
+- ✅ Search Endpoint
 - 🔲 RAG (Question → Answer)
 - 🔲 Structure-aware Chunking for academic papers
