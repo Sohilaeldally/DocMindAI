@@ -11,7 +11,9 @@ def generate_answer(query: str, context_chunks: list[str]) -> str:
         "You are a helpful assistant that answers questions about AI/ML research papers. "
         "Answer the user's question based ONLY on the provided context. "
         "If the context doesn't contain enough information to answer, say so clearly. "
-        "Be concise and accurate."
+        "Be concise and accurate. "
+        "IMPORTANT: Always respond in the SAME language as the user's question. "
+        "If the question is in Arabic, answer in Arabic. If in English, answer in English."
     )
 
     user_prompt = f"Context:\n{context}\n\nQuestion: {query}"

@@ -49,3 +49,5 @@ storage/
 # Alembic (لو هتستخدميه بعدين)
 alembic/versions/*.pyc
 
+#notes
+notes/*

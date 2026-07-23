@@ -1,16 +1,16 @@
+from uuid import UUID
 from app.services.embedding_service import generate_query_embedding
-from app.db.document_chunk_repository import search_similar_chunks
 from app.services.generation_service import generate_answer
+from app.db.document_chunk_repository import search_similar_chunks
 
 
-def _retrieve(query: str, top_k: int = 5):
+def _retrieve(query: str, document_id: UUID | None = None, top_k: int = 5):
     query_embedding = generate_query_embedding(query)
-    return search_similar_chunks(query_embedding, top_k=top_k)
+    return search_similar_chunks(query_embedding, document_id=document_id, top_k=top_k)
 
 
-def search(query: str, top_k: int = 5):
-    results = _retrieve(query, top_k)
-
+def search(query: str, document_id: UUID | None = None, top_k: int = 5):
+    results = _retrieve(query, document_id, top_k)
     return [
         {
             "chunk_id": str(chunk.id),
@@ -23,9 +23,8 @@ def search(query: str, top_k: int = 5):
     ]
 
 
-def ask(query: str, top_k: int = 5) -> dict:
-    results = _retrieve(query, top_k)
-
+def ask(query: str, document_id: UUID | None = None, top_k: int = 5) -> dict:
+    results = _retrieve(query, document_id, top_k)
     context_chunks = [chunk.chunk_text for chunk, _ in results]
     answer = generate_answer(query, context_chunks)
 
@@ -39,7 +38,4 @@ def ask(query: str, top_k: int = 5) -> dict:
         for chunk, distance in results
     ]
 
-    return {
-        "answer": answer,
-        "sources": sources,
-    }
+    return {"answer": answer, "sources": sources}
